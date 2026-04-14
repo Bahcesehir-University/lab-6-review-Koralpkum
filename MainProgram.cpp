@@ -78,7 +78,7 @@ public:
     // TODO 2a: Getter for name
     string getName() const {
         // YOUR CODE HERE
-        return "name";
+        return name;
     }
 
     // TODO 2b: Getter for id
