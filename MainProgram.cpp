@@ -38,26 +38,33 @@ public:
 
     // TODO 1a: Default constructor
     // Set name to "Unknown", id to 0, gpa to 0.0
-    Student() {
+    Student(): name("Unkown"), id(0), gpa(0.0) {}
         // YOUR CODE HERE
-    }
 
     // TODO 1b: Parameterized constructor
     // Initialize all three member variables from parameters
-    Student(string n, int i, double g) {
+    Student(string n, int i, double g) : name(n), id(i), gpa(g) {}
         // YOUR CODE HERE
-    }
 
     // TODO 1c: Copy constructor
     // Create a deep copy of another Student object
     Student(const Student& other) {
         // YOUR CODE HERE
+        
+        name = other.name;
+        id = other.id;
+        gpa = other.gpa;
+        
+        
     }
 
     // TODO 1d: Destructor
     // Print: "Student [name] destroyed"
     ~Student() {
         // YOUR CODE HERE
+        
+        cout << "Student" << name << "destroyed" << endl;
+        
     }
 
     // ----- Task 2: Getters (Encapsulation) -----
@@ -65,19 +72,19 @@ public:
     // TODO 2a: Getter for name
     string getName() const {
         // YOUR CODE HERE
-        return "";
+        return "name";
     }
 
     // TODO 2b: Getter for id
     int getId() const {
         // YOUR CODE HERE
-        return 0;
+        return id;
     }
 
     // TODO 2c: Getter for gpa
     double getGpa() const {
         // YOUR CODE HERE
-        return 0.0;
+        return gpa;
     }
 
     // ----- Task 3: Setters with Validation -----
@@ -86,6 +93,9 @@ public:
     // Name must not be empty. If empty, keep current name.
     void setName(string n) {
         // YOUR CODE HERE
+        if(!n.empty()) {
+            name = n;
+        }
     }
 
     // TODO 3b: Setter for GPA
@@ -93,6 +103,9 @@ public:
     // If out of range, keep current GPA.
     void setGpa(double g) {
         // YOUR CODE HERE
+        if (g >= 0.0 && g <= 4.0) {
+            gpa = g;
+        }
     }
 
     // ----- Task 4: String Operation -----
@@ -102,7 +115,12 @@ public:
     // Hint: loop through each character and use toupper()
     string getFormattedName() const {
         // YOUR CODE HERE
-        return "";
+        
+        string upper = name;
+        for (size_t i = 0; i < upper.length(); i++) {
+        upper[i] = toupper(upper[i]);
+}
+        return upper;
     }
 
     // ----- Task 5: Operator Overloading -----
@@ -111,14 +129,20 @@ public:
     // Two students are equal if they have the same id
     bool operator==(const Student& other) const {
         // YOUR CODE HERE
-        return false;
+        
+        /* if(id == other.id) return true;
+           return false; 
+        */
+        
+         return id == other.id;
     }
 
     // TODO 5b: Less-than operator (<)
     // Compare by GPA (lower GPA = "less than")
     bool operator<(const Student& other) const {
         // YOUR CODE HERE
-        return false;
+    
+        return gpa < other.gpa;
     }
 
     // TODO 5c: Stream insertion operator (<<)
@@ -126,6 +150,7 @@ public:
     // Example: "Student(Ali, ID: 101, GPA: 3.5)"
     friend ostream& operator<<(ostream& os, const Student& s) {
         // YOUR CODE HERE
+        os << "(" << s.name <<", ID: "<< s.id << ", GPA: " << s.gpa << ")";
         return os;
     }
 };
@@ -138,13 +163,27 @@ public:
 // Version 1: Takes two Student references, returns the one with higher GPA
 Student findBestStudent(const Student& a, const Student& b) {
     // YOUR CODE HERE
-    return a;
+    
+   // gpa = a.gpa;
+    if(a < b) {
+        return b;
+    }
+    else {
+        return a;
+    }
+    
 }
 
 // Version 2: Takes an array of Students and its size, returns the one with highest GPA
 Student findBestStudent(Student arr[], int size) {
     // YOUR CODE HERE
-    return arr[0];
+    Student best = arr[0];
+    for( int i = 1; i < size; i++) {
+        if(best < arr[i]) {
+            best = arr[i];
+        }
+    }
+    return best;
 }
 
 // ================================
