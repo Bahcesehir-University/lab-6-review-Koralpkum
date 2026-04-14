@@ -49,7 +49,11 @@ public:
 
     // TODO 1b: Parameterized constructor
     // Initialize all three member variables from parameters
-    Student(string n, int i, double g) : name(n), id(i), gpa(g) {}
+    Student(string n, int i, double g) {
+        name = n;
+        id = i;
+        gpa = g;
+    }
         // YOUR CODE HERE
 
     // TODO 1c: Copy constructor
@@ -171,12 +175,10 @@ Student findBestStudent(const Student& a, const Student& b) {
     // YOUR CODE HERE
     
    // gpa = a.gpa;
-    if(a < b) {
-        return b;
-    }
-    else {
+    if(b < a) {
         return a;
     }
+    return b;
     
 }
 
