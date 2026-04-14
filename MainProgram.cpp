@@ -38,7 +38,13 @@ public:
 
     // TODO 1a: Default constructor
     // Set name to "Unknown", id to 0, gpa to 0.0
-    Student(): name("Unkown"), id(0), gpa(0.0) {}
+    Student() {
+        
+        name = "Unkown";
+        id = 0;
+        gpa = 0.0;
+      
+    }
         // YOUR CODE HERE
 
     // TODO 1b: Parameterized constructor
